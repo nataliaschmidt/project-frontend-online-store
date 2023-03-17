@@ -8,6 +8,7 @@ class Home extends React.Component {
   state = {
     search: '',
     productList: {},
+    button: false,
   };
 
   handleChange = ({ target }) => {
@@ -20,13 +21,15 @@ class Home extends React.Component {
   fetchGetProductsFromCategoryAndQuery = async (search) => {
     // const { search } = this.state;
     const productsList = await getProductsFromCategoryAndQuery(search);
+    // console.log(productsList);
     this.setState({
       productList: productsList,
+      button: true,
     });
   };
 
   render() {
-    const { search, productList } = this.state;
+    const { search, productList, button } = this.state;
     return (
       <section>
         <form>
@@ -62,7 +65,7 @@ class Home extends React.Component {
             </p>
           )
         }
-        <ProductsList products={ productList } />
+        {button && <ProductsList products={ productList } />}
         <Menu />
       </section>
     );
