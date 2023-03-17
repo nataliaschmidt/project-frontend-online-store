@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
   state = {
@@ -14,27 +15,35 @@ class Home extends React.Component {
 
   render() {
     const { search } = this.state;
-    if (!search) {
-      return (
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-      );
-    }
     return (
     //    {!search  undefined ? <p data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</p> : <h1>''</h1>  }
-
-      <form>
-        <label>
-          <input
-            type="search"
-            name="search"
-            value={ search }
-            onChange={ this.handleChange }
-          />
-
-        </label>
-      </form>
+      <section>
+        <form>
+          <label>
+            <input
+              type="search"
+              name="search"
+              value={ search }
+              onChange={ this.handleChange }
+            />
+          </label>
+        </form>
+        <p>
+          <Link
+            data-testid="shopping-cart-button"
+            to="/carrinho-de-compras"
+          >
+            Carrinho de compras.
+          </Link>
+        </p>
+        {
+          !search && (
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+          )
+        }
+      </section>
     //   <search data-testid="home-initial-message"> Digite algum termo de pesquisa ou escolha uma categoria. </search>
     );
   }
