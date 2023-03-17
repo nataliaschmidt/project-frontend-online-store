@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Menu from '../components/Menu';
+import ProductsList from '../components/ProductsList';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
   state = {
     search: '',
+    productList: {},
   };
 
   handleChange = ({ target }) => {
@@ -14,20 +17,35 @@ class Home extends React.Component {
     });
   };
 
+  fetchGetProductsFromCategoryAndQuery = async (search) => {
+    // const { search } = this.state;
+    const productsList = await getProductsFromCategoryAndQuery(search);
+    this.setState({
+      productList: productsList,
+    });
+  };
+
   render() {
-    const { search } = this.state;
+    const { search, productList } = this.state;
     return (
-    //    {!search  undefined ? <p data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</p> : <h1>''</h1>  }
       <section>
         <form>
           <label>
             <input
+              data-testid="query-input"
               type="search"
               name="search"
               value={ search }
               onChange={ this.handleChange }
             />
           </label>
+          <button
+            data-testid="query-button"
+            type="button"
+            onClick={ () => this.fetchGetProductsFromCategoryAndQuery(search) }
+          >
+            Pesquisar
+          </button>
         </form>
         <p>
           <Link
@@ -44,9 +62,9 @@ class Home extends React.Component {
             </p>
           )
         }
+        <ProductsList products={ productList } />
         <Menu />
       </section>
-    //   <search data-testid="home-initial-message"> Digite algum termo de pesquisa ou escolha uma categoria. </search>
     );
   }
 }
