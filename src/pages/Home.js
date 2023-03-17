@@ -33,7 +33,7 @@ class Home extends React.Component {
             data-testid="shopping-cart-button"
             to="/carrinho-de-compras"
           >
-            Carrinho de compras
+            Carrinho de compras.
           </Link>
         </p>
         {
