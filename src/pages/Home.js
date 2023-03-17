@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Menu from '../components/Menu';
 
 class Home extends React.Component {
   state = {
@@ -43,6 +44,7 @@ class Home extends React.Component {
             </p>
           )
         }
+        <Menu />
       </section>
     //   <search data-testid="home-initial-message"> Digite algum termo de pesquisa ou escolha uma categoria. </search>
     );
