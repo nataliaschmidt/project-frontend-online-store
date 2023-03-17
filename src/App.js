@@ -1,8 +1,9 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 // import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 import Home from './pages/Home';
+import ShopCart from './pages/ShopCart';
 
 class App extends React.Component {
   // componentDidMount() {
@@ -12,7 +13,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <Route exact path="/" component={ Home } />
+      <Switch>
+        <Route exact path="/" component={ Home } />
+        <Route exact path="/carrinho-de-compras" component={ ShopCart } />
+      </Switch>
     );
   }
 }
