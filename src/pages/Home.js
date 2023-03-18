@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Menu from '../components/Menu';
 import ProductsList from '../components/ProductsList';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductsFromQuery } from '../services/api';
 
 class Home extends React.Component {
   state = {
@@ -18,9 +18,9 @@ class Home extends React.Component {
     });
   };
 
-  fetchGetProductsFromCategoryAndQuery = async (search) => {
+  fetchGetProductsFromQuery = async (search) => {
     // const { search } = this.state;
-    const productsList = await getProductsFromCategoryAndQuery(search);
+    const productsList = await getProductsFromQuery(search);
     // console.log(productsList);
     this.setState({
       productList: productsList,
@@ -45,7 +45,7 @@ class Home extends React.Component {
           <button
             data-testid="query-button"
             type="button"
-            onClick={ () => this.fetchGetProductsFromCategoryAndQuery(search) }
+            onClick={ () => this.fetchGetProductsFromQuery(search) }
           >
             Pesquisar
           </button>
