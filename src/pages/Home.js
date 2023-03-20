@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import addProduct from '../services/LocalStorage';
 
 class Home extends React.Component {
   state = {
@@ -120,7 +121,7 @@ class Home extends React.Component {
                 </button>
               </label>
               <Link
-                to="/cart"
+                to="/carrinho-de-compras"
                 data-testid="shopping-cart-button"
               >
                 Carrinho de Compras
@@ -145,6 +146,13 @@ class Home extends React.Component {
                               {` ${result.price}`}
                             </p>
                           </Link>
+                          <button
+                            type="button"
+                            data-testid="product-add-to-cart"
+                            onClick={ () => addProduct(result) }
+                          >
+                            Adicionar ao Carrinho
+                          </button>
                         </li>
                       ))
                     }
