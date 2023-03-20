@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductById } from '../services/api';
+import addProduct from '../services/LocalStorage';
 
 class Products extends React.Component {
   state = {
@@ -43,8 +44,8 @@ class Products extends React.Component {
         </button>
         <button
           type="button"
-          data-testid="product-add-to-cart"
-          // onClick={}
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => addProduct(product) }
         >
           Adicionar ao Carrinho
         </button>

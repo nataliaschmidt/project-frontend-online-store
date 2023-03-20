@@ -8,12 +8,13 @@ class ShopCart extends Component {
   componentDidMount() {
     const storage = 'productsLocalStorage';
     const getStorage = JSON.parse(localStorage.getItem(storage));
+    // console.log(getStorage);
     this.setState({ products: getStorage });
   }
 
   render() {
     const { products } = this.state;
-    console.log(products);
+    // console.log(products);
     const storage = 'productsLocalStorage';
     const getStorage = JSON.parse(localStorage.getItem(storage));
     return (

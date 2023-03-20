@@ -121,7 +121,7 @@ class Home extends React.Component {
                 </button>
               </label>
               <Link
-                to="/cart"
+                to="/carrinho-de-compras"
                 data-testid="shopping-cart-button"
               >
                 Carrinho de Compras
