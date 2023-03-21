@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Form extends Component {
   state = {
@@ -11,13 +12,14 @@ export default class Form extends Component {
 
   componentDidMount() {
     const { product } = this.props;
+
     this.setState({
       product,
     });
-
     if (!JSON.parse(localStorage.getItem(`${product.id}`))) {
       localStorage.setItem(`${product.id}`, JSON.stringify([]));
     }
+    // console.log(product);
   }
 
   handleChange = ({ target }) => {
@@ -28,12 +30,26 @@ export default class Form extends Component {
     });
   };
 
-  handleErrors = () => {
-    const { email, textArea } = this.state;
+  onSubmit = () => {
+    const { email, textArea, radio, product } = this.state;
     const regExpEmail = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+.[a-z]?$/i;
     const checkEmail = regExpEmail.test(email);
-    const validate = email && textArea;
-    if (!validate || !checkEmail) {
+    const Obj = {
+      email,
+      rating: radio,
+      text: textArea,
+    };
+    if (email && textArea && checkEmail) {
+      const getLocalStorage = JSON.parse(localStorage.getItem(`${product.id}`));
+      const newLocalStorage = [...getLocalStorage, Obj];
+      localStorage.setItem(`${product.id}`, JSON.stringify(newLocalStorage));
+      this.setState({
+        email: '',
+        textArea: '',
+        radio: '',
+        error: false,
+      });
+    } else {
       this.setState({
         error: true,
         errorMsg: 'Campos inválidos',
@@ -41,32 +57,10 @@ export default class Form extends Component {
     }
   };
 
-  onSubmit = () => {
-    this.handleErrors();
-    const { email, textArea, radio, product, error } = this.state;
-    const Obj = {
-      email,
-      rating: radio,
-      text: textArea,
-    };
-    const getLocalStorage = JSON.parse(localStorage.getItem(`${product.id}`));
-    const newLocalStorage = [...getLocalStorage, Obj];
-    localStorage.setItem(`${product.id}`, JSON.stringify(newLocalStorage));
-    this.setState({
-      email: '',
-      textArea: '',
-      radio: '',
-    });
-
-    if (error) {
-      this.setState({
-        error: false,
-      });
-    }
-  };
-
   render() {
-    const { email, textArea, radio, error, errorMsg } = this.state;
+    const { email, textArea, error, errorMsg } = this.state;
+    const { product } = this.props;
+    const getLocalStorage = JSON.parse(localStorage.getItem(`${product.id}`));
     return (
       <form>
         <label htmlFor="email">
@@ -151,11 +145,25 @@ export default class Form extends Component {
           Enviar
         </button>
 
-        <div data-testid="error-msg">
-          { error && <p>{errorMsg}</p> }
+          {error && <p data-testid="error-msg">{errorMsg}</p>}
+
+        <div>
+          {
+            getLocalStorage && getLocalStorage
+              .map((evaluetion) => (
+                <div key={ evaluetion.email }>
+                  <p data-testid="review-card-email">{evaluetion.email}</p>
+                <p data-testid="review-card-rating">{evaluetion.rating}</p>
+                  <p data-testid="review-card-evaluation">{evaluetion.text}</p>
+                </div>))
+          }
         </div>
 
       </form>
     );
   }
 }
+
+Form.propTypes = {
+  product: PropTypes.shape({}).isRequired,
+};

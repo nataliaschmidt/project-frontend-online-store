@@ -19,7 +19,7 @@ class Products extends React.Component {
   render() {
     // console.log(this.props);
     const { product } = this.state;
-    //console.log(product);
+    // console.log(product);
     return (
       <div>
         <h2 data-testid="product-detail-name">{product.title}</h2>
