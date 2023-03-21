@@ -7,15 +7,16 @@ export default class Form extends Component {
     textArea: '',
     radio: '',
     error: false,
-    product: {},
+    // product: {},
   };
 
   componentDidMount() {
     const { product } = this.props;
+    console.log(product);
+    // this.setState({
+    //   product,
+    // }, () => console.log(this.state.product) );
 
-    this.setState({
-      product,
-    });
     if (!JSON.parse(localStorage.getItem(`${product.id}`))) {
       localStorage.setItem(`${product.id}`, JSON.stringify([]));
     }
@@ -31,7 +32,8 @@ export default class Form extends Component {
   };
 
   onSubmit = () => {
-    const { email, textArea, radio, product } = this.state;
+    const { email, textArea, radio } = this.state;
+    const { product } = this.props;
     const regExpEmail = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+.[a-z]?$/i;
     const checkEmail = regExpEmail.test(email);
     const Obj = {
@@ -39,7 +41,7 @@ export default class Form extends Component {
       rating: radio,
       text: textArea,
     };
-    if (email && textArea && checkEmail) {
+    if (email && checkEmail && radio) {
       const getLocalStorage = JSON.parse(localStorage.getItem(`${product.id}`));
       const newLocalStorage = [...getLocalStorage, Obj];
       localStorage.setItem(`${product.id}`, JSON.stringify(newLocalStorage));
@@ -145,7 +147,7 @@ export default class Form extends Component {
           Enviar
         </button>
 
-          {error && <p data-testid="error-msg">{errorMsg}</p>}
+        {error && <p data-testid="error-msg">{errorMsg}</p>}
 
         <div>
           {
@@ -153,7 +155,7 @@ export default class Form extends Component {
               .map((evaluetion) => (
                 <div key={ evaluetion.email }>
                   <p data-testid="review-card-email">{evaluetion.email}</p>
-                <p data-testid="review-card-rating">{evaluetion.rating}</p>
+                  <p data-testid="review-card-rating">{evaluetion.rating}</p>
                   <p data-testid="review-card-evaluation">{evaluetion.text}</p>
                 </div>))
           }
@@ -165,5 +167,7 @@ export default class Form extends Component {
 }
 
 Form.propTypes = {
-  product: PropTypes.shape({}).isRequired,
+  product: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }).isRequired,
 };
