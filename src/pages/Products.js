@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductById } from '../services/api';
 import addProduct from '../services/LocalStorage';
+import Form from '../components/Form';
 
 class Products extends React.Component {
   state = {
@@ -18,7 +19,7 @@ class Products extends React.Component {
   render() {
     // console.log(this.props);
     const { product } = this.state;
-    console.log(product);
+    //console.log(product);
     return (
       <div>
         <h2 data-testid="product-detail-name">{product.title}</h2>
@@ -49,6 +50,11 @@ class Products extends React.Component {
         >
           Adicionar ao Carrinho
         </button>
+        <div>
+          <Form
+            product={ product }
+          />
+        </div>
       </div>
     );
   }
