@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Checkout extends React.Component {
   state = {
@@ -10,6 +11,7 @@ class Checkout extends React.Component {
     cep: '',
     address: '',
     radio: '',
+    error: false,
   };
 
   componentDidMount() {
@@ -17,17 +19,50 @@ class Checkout extends React.Component {
     this.setState({ keyStorage: value });
   }
 
-  handeChange({ target }) {
+  handeChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
     });
-  }
+  };
+
+  handleClick = () => {
+    const {
+      name,
+      email,
+      cpf,
+      phone,
+      cep,
+      address,
+      radio,
+    } = this.state;
+    const validate = name && email && cpf && phone && cep && address && radio;
+    const { history } = this.props;
+    if (!validate) {
+      this.setState({ error: true });
+    } else {
+      localStorage.removeItem('productsLocalStorage');
+      // return <Redirect to="/" />;
+      history.push('/');
+      const storage = 'productsLocalStorage';
+
+      if (!JSON.parse(localStorage.getItem(storage))) {
+        localStorage.setItem(storage, JSON.stringify([]));
+      }
+    }
+  };
 
   render() {
-    const { keyStorage, name, email, cpf, phone, cep, address } = this.state;
-    console.log(keyStorage);
+    const { keyStorage,
+      name,
+      email,
+      cpf,
+      phone,
+      cep,
+      address,
+      error,
+    } = this.state;
     return (
 
       <div>
@@ -52,6 +87,7 @@ class Checkout extends React.Component {
         }
         <form>
           <input
+            placeholder="Nome"
             onChange={ this.handeChange }
             value={ name }
             type="text"
@@ -59,6 +95,7 @@ class Checkout extends React.Component {
             data-testid="checkout-fullname"
           />
           <input
+            placeholder="Email"
             onChange={ this.handeChange }
             value={ email }
             type="email"
@@ -66,6 +103,7 @@ class Checkout extends React.Component {
             data-testid="checkout-email"
           />
           <input
+            placeholder="CPF"
             onChange={ this.handeChange }
             value={ cpf }
             type="text"
@@ -73,6 +111,7 @@ class Checkout extends React.Component {
             data-testid="checkout-cpf"
           />
           <input
+            placeholder="Telefone"
             onChange={ this.handeChange }
             value={ phone }
             type="text"
@@ -80,6 +119,7 @@ class Checkout extends React.Component {
             data-testid="checkout-phone"
           />
           <input
+            placeholder="CEP"
             onChange={ this.handeChange }
             value={ cep }
             type="text"
@@ -87,6 +127,7 @@ class Checkout extends React.Component {
             data-testid="checkout-cep"
           />
           <input
+            placeholder="Endereço"
             onChange={ this.handeChange }
             value={ address }
             type="text"
@@ -138,14 +179,26 @@ class Checkout extends React.Component {
             />
           </label>
           <button
+            // disabled={ !validate }
+            type="button"
+            onClick={ this.handleClick }
             data-testid="checkout-btn"
           >
             Finalizar
           </button>
         </form>
+        {
+          error ? <p data-testid="error-msg">Campos inválidos</p> : null
+        }
       </div>
 
     );
   }
 }
+Checkout.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
 export default Checkout;
