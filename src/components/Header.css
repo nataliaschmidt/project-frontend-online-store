@@ -1,0 +1,22 @@
+header {
+  align-items: center;
+  background-color: #111a6f;
+  display: flex;
+  height: 155px;
+  justify-content: center;
+  position: relative;
+}
+
+.header-logo {
+  height: 120px;
+  width: 350px;
+}
+
+.icon-cart {
+  bottom: 55px;
+  color: white;
+  height: 50px;
+  position: absolute;
+  right: 100px;
+  width: 50px;
+}
