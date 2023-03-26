@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 
 class ShopCart extends Component {
   state = {
@@ -64,61 +65,64 @@ class ShopCart extends Component {
     const storage = 'productsLocalStorage';
     const getStorage = JSON.parse(localStorage.getItem(storage));
     return (
-      <div>
-        {
-          getStorage.length === 0
-            ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-            : (
-              <div>
-                {
-                  products.map((product) => (
-                    <div key={ product.product.id }>
-                      <p data-testid="shopping-cart-product-name">
-                        {product.product.title}
-                      </p>
-                      <p data-testid="shopping-cart-product-quantity">
-                        {product.quantity}
-                      </p>
+      <>
+        <Header />
+        <div>
+          {
+            getStorage.length === 0
+              ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+              : (
+                <div>
+                  {
+                    products.map((product) => (
+                      <div key={ product.product.id }>
+                        <p data-testid="shopping-cart-product-name">
+                          {product.product.title}
+                        </p>
+                        <p data-testid="shopping-cart-product-quantity">
+                          {product.quantity}
+                        </p>
 
-                      <button
-                        data-testid="product-increase-quantity"
-                        type="button"
-                        onClick={ () => this.increaseProduct(product) }
-                      >
-                        +
+                        <button
+                          data-testid="product-increase-quantity"
+                          type="button"
+                          onClick={ () => this.increaseProduct(product) }
+                        >
+                          +
 
-                      </button>
-                      <button
-                        data-testid="product-decrease-quantity"
-                        type="button"
-                        onClick={ () => this.decreaseProduct(product) }
-                      >
-                        -
+                        </button>
+                        <button
+                          data-testid="product-decrease-quantity"
+                          type="button"
+                          onClick={ () => this.decreaseProduct(product) }
+                        >
+                          -
 
-                      </button>
-                      <button
-                        data-testid="remove-product"
-                        type="button"
-                        onClick={ () => this.removeProduct(product) }
-                      >
-                        Excluir
+                        </button>
+                        <button
+                          data-testid="remove-product"
+                          type="button"
+                          onClick={ () => this.removeProduct(product) }
+                        >
+                          Excluir
 
-                      </button>
+                        </button>
 
-                    </div>
-                  ))
-                }
-              </div>
-            )
-        }
-        <Link data-testid="checkout-products" to="/checkout">
-          <button
-            type="button"
-          >
-            Resumo da compra
-          </button>
-        </Link>
-      </div>
+                      </div>
+                    ))
+                  }
+                </div>
+              )
+          }
+          <Link data-testid="checkout-products" to="/checkout">
+            <button
+              type="button"
+            >
+              Resumo da compra
+            </button>
+          </Link>
+        </div>
+      </>
     );
   }
 }

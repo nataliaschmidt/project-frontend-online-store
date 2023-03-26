@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ShopCart from './pages/ShopCart';
 import Checkout from './pages/Checkout';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
   // componentDidMount() {

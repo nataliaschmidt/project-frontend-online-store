@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getProductById } from '../services/api';
 import addProduct from '../services/LocalStorage';
 import Form from '../components/Form';
+import Header from '../components/Header';
 
 class Products extends React.Component {
   state = {
@@ -21,43 +22,46 @@ class Products extends React.Component {
     const { product } = this.state;
     // console.log(product);
     return (
-      <div>
-        <h2 data-testid="product-detail-name">{product.title}</h2>
-        <img
-          data-testid="product-detail-image"
-          src={ `${product.thumbnail}` }
-          alt="product-img"
-        />
-        <p data-testid="product-detail-price">
-          R$:
-          {` ${product.price}`}
-        </p>
-        <button
-          type="button"
-        >
-          <Link
-            data-testid="shopping-cart-button"
-            to="/carrinho-de-compras"
-          >
-            Carrinho de Compras
-
-          </Link>
-        </button>
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ () => addProduct(product) }
-        >
-          Adicionar ao Carrinho
-        </button>
+      <>
+        <Header />
         <div>
-          {
-            product.id && <Form
-              product={ product }
-            />
-          }
+          <h2 data-testid="product-detail-name">{product.title}</h2>
+          <img
+            data-testid="product-detail-image"
+            src={ `${product.thumbnail}` }
+            alt="product-img"
+          />
+          <p data-testid="product-detail-price">
+            R$:
+            {` ${product.price}`}
+          </p>
+          <button
+            type="button"
+          >
+            <Link
+              data-testid="shopping-cart-button"
+              to="/carrinho-de-compras"
+            >
+              Carrinho de Compras
+
+            </Link>
+          </button>
+          <button
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            onClick={ () => addProduct(product) }
+          >
+            Adicionar ao Carrinho
+          </button>
+          <div>
+            {
+              product.id && <Form
+                product={ product }
+              />
+            }
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }
