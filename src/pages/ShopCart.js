@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { MdDelete, MdOutlineRemoveShoppingCart } from 'react-icons/md';
+import { AiFillMinusSquare, AiFillPlusSquare } from 'react-icons/ai';
 import Header from '../components/Header';
+import './ShoppingCart.css';
 
 class ShopCart extends Component {
   state = {
@@ -70,44 +73,56 @@ class ShopCart extends Component {
         <div>
           {
             getStorage.length === 0
-              ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+              ? <p data-testid="shopping-cart-empty-message" className="empty-cart">
+                Seu carrinho está vazio
+                {' '}
+                <MdOutlineRemoveShoppingCart className="icon-empty-cart" />
+              </p>
               : (
-                <div>
+                <div className="container-all-infos">
                   {
                     products.map((product) => (
-                      <div key={ product.product.id }>
+                      <div
+                        key={ product.product.id }
+                        className="card-product-shopping-card"
+                      >
                         <p data-testid="shopping-cart-product-name">
                           {product.product.title}
                         </p>
+                        <img
+                          className="card-img"
+                          src={ `${product.product.thumbnail}` }
+                          alt="product-img"
+                        />
                         <p data-testid="shopping-cart-product-quantity">
                           {product.quantity}
                         </p>
+                        <div className="containet-button-card">
+                          <button
+                            data-testid="product-increase-quantity"
+                            type="button"
+                            onClick={ () => this.increaseProduct(product) }
+                          >
+                            <AiFillPlusSquare id="button-icon1" />
 
-                        <button
-                          data-testid="product-increase-quantity"
-                          type="button"
-                          onClick={ () => this.increaseProduct(product) }
-                        >
-                          +
+                          </button>
+                          <button
+                            data-testid="product-decrease-quantity"
+                            type="button"
+                            onClick={ () => this.decreaseProduct(product) }
+                          >
+                            <AiFillMinusSquare id="button-icon2" />
 
-                        </button>
-                        <button
-                          data-testid="product-decrease-quantity"
-                          type="button"
-                          onClick={ () => this.decreaseProduct(product) }
-                        >
-                          -
+                          </button>
+                          <button
+                            data-testid="remove-product"
+                            type="button"
+                            onClick={ () => this.removeProduct(product) }
+                          >
+                            <MdDelete id="button-icon3" />
 
-                        </button>
-                        <button
-                          data-testid="remove-product"
-                          type="button"
-                          onClick={ () => this.removeProduct(product) }
-                        >
-                          Excluir
-
-                        </button>
-
+                          </button>
+                        </div>
                       </div>
                     ))
                   }
@@ -116,6 +131,7 @@ class ShopCart extends Component {
           }
           <Link data-testid="checkout-products" to="/checkout">
             <button
+              className="btn btn-primary btn-resume"
               type="button"
             >
               Resumo da compra

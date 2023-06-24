@@ -9,7 +9,6 @@
 
 .lateral-menu {
   align-items: center;
-  background-color: #faf9f9;
   border: 2px solid #111a6f;
   color: #ff9105;
   display: flex;
@@ -43,13 +42,11 @@
 }
 
 .teste {
-  background-color: #faf9f9;
   border: 2px solid #111a6f;
   width: 100%;
 }
 
 .teste2 {
-  background-color: #faf9f9;
   border: 2px solid #111a6f;
   width: 100%;
 }
@@ -132,13 +129,14 @@
   width: 110px;
 }
 
-.btn-card-produc {
+.btn-card-product {
   border-radius: 20px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.515);
   color: #111a6f;
   font-weight: 600;
   margin-top: 20px;
   padding: 10px;
+  background-color: white;
 }
 
 .btn-card-product:hover {

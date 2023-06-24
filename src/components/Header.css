@@ -12,6 +12,15 @@ header {
   width: 350px;
 }
 
+.icon-home {
+  bottom: 55px;
+  color: white;
+  height: 50px;
+  left: 100px;
+  position: absolute;
+  width: 50px;
+}
+
 .icon-cart {
   bottom: 55px;
   color: white;
