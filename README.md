@@ -1,10 +1,39 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+# Front-end Online Store
+
+Este projeto foi desenvolvido em equipe durante o módulo de front-end do curso de Desenvolvimento Web na Trybe. Criamos uma versão simplificada, sem persistência no banco de dados, de uma loja online.
+
+## Funcionalidades
+<hr>
+
+- Buscar produtos por termos e categorias a partir da API do Mercado Livre.
+
+- Interagir com os produtos de modo a adicioná-los e removê-los de um carrinho de compras em diferentes quantidades.
+
+- Visualizar detalhes e avaliações prévias de um produto.
+
+- Criar novas avaliações para o produto.
+
+- Simular a finalização da compra dos itens selecionados.
+
+## Tecnologias Utilizadas
+<hr>
+
+- React
+- JavaScript
+- CSS
+
+## Instruções
+<hr>
+
+- Clone este repositório.
+
+```bash
+git clone git@github.com:nataliaschmidt/project-frontend-online-store.git
+```
+
+- Entre na pasta do repositório que você acabou de clonar.
+- Instale as dependências e inicialize o projeto.
+```bash
+npm install
+npm start
+```
